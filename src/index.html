@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/terminal.css" />
+    <title>Malte Neumann</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+<div class="container">
+    <nav>
+        <ul>
+            <li id="about">/about</li>
+            <li id="contact">/contact</li>
+            <li id="terminal">/terminal</li>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>malte@neumann:~$<span class="cursor">|</span></h1>
+
+        <table>
+            <tr>
+                <th>Find me online:</th>
+                <th>Current projects:</th>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://malteneu.com/instagram" target="_blank">Instagram</a>
+                </td>
+                <td>
+                    <a href="http://htbw.de" target="_blank">Horn to be Wild - Festival</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://malteneu.com/snapchat" target="_blank">Snapchat</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://malteneu.com/facebook" target="_blank">Facebook</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://malteneu.com/github" target="_blank">Github</a>
+                </td>
+            </tr>
+        </table>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li id="impress">/impress</li>
+            </ul>
+        </nav>
+    </footer>
+</div>
+
+<div class="hidden">
+    <div id="terminal-content">
+        <div id="terminal-output">
+            <p class="output">Type 'help' to see a list of available commands.</p>
+        </div>
+        <div class="terminal">
+            <label>
+                guest@neumann:~$
+            </label>
+             <input class="terminal-input" onblur="this.focus()" id="terminal-input" type="text">
+        </div>
+    </div>
+</div>
+
+<script src="js/winbox.bundle.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
