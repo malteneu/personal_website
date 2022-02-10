@@ -6,6 +6,16 @@ footer {
     font-size: 12px;
 }
 
+footer nav {
+    width: 50%;
+}
+
+footer nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 footer nav ul li {
     color: var(--basic-text-color);
     cursor: pointer;
