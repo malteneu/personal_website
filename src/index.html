@@ -60,21 +60,23 @@
         <nav>
             <ul>
                 <li id="impress">/impress</li>
+                <li id="cookies">/cookies</li>
+                <li id="source">/source</li>
             </ul>
         </nav>
     </footer>
 </div>
 
 <div class="hidden">
-    <div id="terminal-content">
+    <div id="terminal-content" class="terminal-content">
         <div id="terminal-output">
-            <p class="output">Type 'help' to see a list of available commands.</p>
+            <p>Type 'help' to see a list of available commands.</p>
         </div>
         <div class="terminal">
             <label>
                 guest@neumann:~$
             </label>
-             <input class="terminal-input" onblur="this.focus()" id="terminal-input" type="text">
+             <input name="command-line-input" class="terminal-input" onblur="focusinput()" id="terminal-input" type="text">
         </div>
     </div>
 </div>
