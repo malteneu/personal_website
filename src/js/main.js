@@ -1,130 +1,20 @@
-const terminal = document.querySelector('#terminal')
-const terminalcontent = document.querySelector('#terminal-content')
-const input = document.querySelector('#terminal-input')
-const output = document.querySelector('#terminal-output')
-let used_commands = []
-let used_command_pointer = 1
-let terminalview = null
+const maincontent = document.querySelector('#main-content')
 
+loadHome()
 
-terminal.addEventListener('click', () => {
-    terminalview = new WinBox({
-        title: 'Terminal',
-        modal: true,
-        width: '95%',
-        height: '90%',
-        mount: terminalcontent,
-        background: 'var(--standout-text-color)',
-
-        onclose: () => {
-            window.removeEventListener('resize', () => {})
-            document.removeEventListener('keyup', inputevents)
-        }
-    })
-
-    window.addEventListener('resize', function(e) {
-        terminalview.resize('95%', '90%')
-        terminalview.move("center", "center");
-    }, true);
-
-    document.addEventListener('keyup', inputevents)
-    input.value = ""
-    input.focus()
-})
-
-input.addEventListener('blur', () => {
-    input.focus()
-})
-
-function inputevents(e) {
-
-    e.preventDefault()
-    e.stopImmediatePropagation()
-
-    if (e.key === 'Enter') {
-
-        let command = input.value.trim()
-
-        let div = document.createElement('div')
-        let used_command = document.createElement('p')
-        used_command.append('guest@neumann:~$ ' + input.value.trim())
-        div.appendChild(used_command)
-        output.appendChild(div)
-
-        if (command !== "") {
-            used_commands.push(command)
-
-            let inputfields = command.split(' ')
-
-            switch (inputfields[0].toLowerCase()) {
-                case 'help':
-                    help(inputfields);
-                    break;
-                case 'clear':
-                    output.innerHTML = ""
-                    break;
-                case 'sudo':
-                    sudo(inputfields)
-                    break;
-                case 'exit':
-                    terminalview.close()
-                    break;
-                default:
-                    let response = document.createElement('p')
-                    response.append('Command not found: ' + inputfields[0] + ' - Try \'help\' to get started.')
-                    output.appendChild(response)
-                    break;
-            }
-
-            used_command_pointer = 1
-            input.value = ""
-        }
-    }
-
-    if (e.key === 'Escape') {
-        terminalview.close()
-    }
-
-    if (e.key === 'ArrowUp') {
-
-        if (used_command_pointer <= used_commands.length) {
-            input.value = used_commands[used_commands.length - used_command_pointer]
-            if (used_command_pointer < used_commands.length) {
-                used_command_pointer++;
-            }
-        }
-    }
-
-    if (e.key === 'ArrowDown') {
-
-        if (used_command_pointer > 1) {
-            input.value = used_commands[used_commands.length - used_command_pointer + 1]
-            if (used_command_pointer > 1) {
-                used_command_pointer--;
-            }
-        } else {
-            input.value = ""
-        }
-    }
+/**
+ * @param {String} url - address for the HTML to fetch
+ * @return {String} the resulting HTML string fragment
+ */
+async function fetchHtmlAsText(url) {
+    return await (await fetch(url)).text();
 }
 
-function focusinput() {
-    window.setTimeout(function () {
-        input.focus();
-    }, 0);
+// this is your `load_home() function`
+async function loadHome() {
+    maincontent.innerHTML = await fetchHtmlAsText("pages/home.html");
 }
 
-function help(args, div) {
-    let response = document.createElement('html')
-    response.append("Available Commands: </br> Test")
-    output.appendChild(response)
+async function loadCookie() {
+    maincontent.innerHTML = await fetchHtmlAsText("pages/cookies.html");
 }
-
-function sudo(args) {
-    if (args[1] && args[1].toLowerCase() === "rm" && args[2] && args[2].toLowerCase().includes("-r") && args[3] && args[3] === "/") {
-        terminalview.close()
-        output.innerHTML = ""
-    }
-}
-
-

@@ -25,43 +25,16 @@
 
     <main>
         <h1>malte@neumann:~$<span class="cursor">|</span></h1>
+        <div id="main-content">
 
-        <table>
-            <tr>
-                <th>Find me online:</th>
-                <th>Current projects:</th>
-            </tr>
-            <tr>
-                <td>
-                    <a href="https://malteneu.com/instagram" target="_blank">Instagram</a>
-                </td>
-                <td>
-                    <a href="http://htbw.de" target="_blank">Horn to be Wild - Festival</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="https://malteneu.com/snapchat" target="_blank">Snapchat</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="https://malteneu.com/facebook" target="_blank">Facebook</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="https://malteneu.com/github" target="_blank">Github</a>
-                </td>
-            </tr>
-        </table>
+        </div>
     </main>
     <footer>
         <nav>
             <ul>
                 <li id="impress">/impress</li>
                 <li id="cookies">/cookies</li>
-                <li id="source">/source</li>
+                <li id="repo">/repo</li>
             </ul>
         </nav>
     </footer>
@@ -70,19 +43,22 @@
 <div class="hidden">
     <div id="terminal-content" class="terminal-content">
         <div id="terminal-output">
-            <p>Type 'help' to see a list of available commands.</p>
+            <div class="terminal-output-single">
+                <p>Type 'help' to see a list of available commands.</p>
+            </div>
         </div>
-        <div class="terminal">
-            <label>
+        <div class="command-line">
+            <label class="command-line" for="command-line-input">
                 guest@neumann:~$
             </label>
-             <input name="command-line-input" class="terminal-input" onblur="focusinput()" id="terminal-input" type="text">
+             <input name="command-line-input" id="command-line-input" class="command-line-input" onblur="focusinput()" autofocus autocomplete="off" type="text">
         </div>
     </div>
 </div>
 
 <script src="js/winbox.bundle.js"></script>
 <script src="js/main.js"></script>
+<script src="js/terminal.js"></script>
 </body>
 
 </html>

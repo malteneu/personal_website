@@ -1,23 +1,26 @@
-.terminal {
-    display: flex;
+.hidden {
+    display: none;
 }
 
-.terminal-input {
+.wb-body {
+    background: #111;
+    padding: 20px;
+
+}
+
+.terminal-content {
+    font-size: 20px;
+}
+
+.command-line-input {
     border: none;
     outline: none;
     background: transparent;
     color: inherit;
-    font-family: inherit;
     font-size: inherit;
-    size: inherit;
-    flex-grow: 1;
-    padding-left: 11px;
+    font-family: inherit;
 }
 
 .terminal-content p {
     margin: 0;
-}
-
-.terminal-input {
-
 }
