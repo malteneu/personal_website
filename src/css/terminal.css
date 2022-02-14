@@ -5,14 +5,18 @@
 .wb-body {
     background: #111;
     padding: 20px;
-
 }
 
 .terminal-content {
     font-size: 20px;
 }
 
-.command-line-input {
+.command-line {
+    display: flex;
+    width: 100%;
+}
+
+.command-line input {
     border: none;
     outline: none;
     background: transparent;
