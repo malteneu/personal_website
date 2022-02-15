@@ -23,8 +23,17 @@
     color: inherit;
     font-size: inherit;
     font-family: inherit;
+    flex-grow: 1;
+    --tw-space-x-reverse: 0;
+    margin-right: calc(.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .terminal-content p {
     margin: 0;
 }
+
+.terminal-output-single {
+    margin-bottom: 12px;
+}
+
