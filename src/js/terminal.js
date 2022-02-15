@@ -1,10 +1,12 @@
+const r = document.querySelector(':root')
 const terminalcontent = document.querySelector('#terminal-content')
 const input = document.querySelector('#command-line-input')
 const output = document.querySelector('#terminal-output')
 let used_commands = []
 let used_command_pointer = 1
 let terminalview = null
-let terminalviewbody = null
+let contentDiv = null
+let response = null
 
 function loadTerminal() {
 
@@ -23,9 +25,7 @@ function loadTerminal() {
         }
     })
 
-    terminalviewbody = document.querySelector('.wb-body')
-
-    window.addEventListener('resize', function (e) {
+    window.addEventListener('resize', () => {
         terminalview.resize('95%', '90%')
         terminalview.move("center", "center");
     }, true);
@@ -33,6 +33,7 @@ function loadTerminal() {
     document.addEventListener('keydown', inputevents)
 
     input.value = ""
+    input.scrollIntoView()
     input.focus()
 }
 
@@ -40,15 +41,14 @@ function inputevents(e) {
 
     if (e.key === 'Enter') {
 
-        let response = "Error"
-
         let command = input.value.trim()
 
-        let div = document.createElement('div')
+        contentDiv = document.createElement('div')
+        contentDiv.className = "terminal-output-single"
         let used_command = document.createElement('p')
         used_command.append('guest@neumann:~$ ' + input.value.trim())
-        div.appendChild(used_command)
-        output.appendChild(div)
+        contentDiv.appendChild(used_command)
+        output.appendChild(contentDiv)
 
         if (command !== "") {
             used_commands.push(command)
@@ -63,6 +63,9 @@ function inputevents(e) {
                     terminalview.close()
                 case 'clear':
                     output.innerHTML = ""
+                    break;
+                case 'color':
+                    color(inputfields)
                     break;
                 case 'sudo':
                     sudo(inputfields)
@@ -90,7 +93,7 @@ function inputevents(e) {
                 default:
                     response = document.createElement('p')
                     response.append('Command not found: ' + inputfields[0] + ' - Try \'help\' to get started.')
-                    output.appendChild(response)
+                    contentDiv.appendChild(response)
                     break;
             }
 
@@ -136,10 +139,20 @@ function focusinput() {
     }, 0);
 }
 
-function help(args) {
-    let response = document.createElement('html')
-    response.append("Available Commands: </br> Test")
-    output.appendChild(response)
+function help() {
+    let response = document.createElement('p')
+    response.innerHTML =
+        "Available Commands:<br>" +
+        "Type help [command] for a detailed version! <br>" +
+        "clear<br>" +
+        "coinflip<br>" +
+        "color<br>" +
+        "echo<br>" +
+        "exit<br>" +
+        "fullscreen<br>" +
+        "random<br>"
+
+    contentDiv.appendChild(response)
 }
 
 function sudo(args) {
@@ -151,6 +164,9 @@ function sudo(args) {
 
 function random(args) {
     switch (args[1]) {
+        case 'color':
+            randomColor()
+            break;
         case 'website':
             useless()
             break;
@@ -162,14 +178,14 @@ function random(args) {
         default:
             let response = document.createElement('p')
             response.innerHTML = "Random Number: " + getRandomNumber(args[2] ? args[2] : 2)
-            output.appendChild(response)
+            contentDiv.appendChild(response)
     }
 }
 
 function flipcoin() {
     let response = document.createElement('p')
     response.innerHTML = getRandomNumber(2) ? "Heads" : "Tail"
-    output.appendChild(response)
+    contentDiv.appendChild(response)
 }
 
 function useless() {
@@ -264,6 +280,42 @@ function useless() {
     window.open(sitesList[getRandomNumber(sitesList.length + 1)])
 }
 
+function color(args) {
+    if(args[1]) {
+        response = document.createElement('p')
+
+        if(args[1].match('#{1}[0-9a-zA-Z]{1,8}$')) {
+            response.innerText = "Color changed to: " + args[1]
+            changeColor(args[1])
+        } else {
+            response.innerText = "Color code incorrect: Start with a '#' followed by a maximum of 6 Digits."
+        }
+
+        contentDiv.appendChild(response)
+
+    } else {
+        changeColor()
+    }
+}
+
+function randomColor() {
+    let colors = [
+        '#00aa00',
+        '#ff0000',
+        '#0c4df3',
+        '#b50af1',
+        '#f5d50e',
+        '#0ccebe'
+    ]
+
+    changeColor(colors[getRandomNumber(colors.length)])
+}
+
+function changeColor(color = "#00aa00") {
+    r.style.setProperty('--standout-text-color', color)
+}
+
 function getRandomNumber(max) {
     return Math.floor(Math.random() * max);
 }
+
