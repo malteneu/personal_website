@@ -7,6 +7,10 @@ navigation_items.forEach(navigation_item => {
     })
 })
 
+document.getElementById('home').addEventListener('click', () => {
+    loadHome()
+})
+
 loadHome()
 
 async function fetchHtmlAsText(url) {

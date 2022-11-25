@@ -56,10 +56,12 @@ a {
 
 p {
     margin: 20px 0;
+    text-align: justify;
 }
 
 li {
     margin-top: 5px;
+    text-align: justify;
 }
 
 button {
@@ -92,6 +94,10 @@ th {
 
 td {
     text-align: left;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .container {
